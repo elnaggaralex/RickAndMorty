@@ -11,7 +11,7 @@ import Foundation
 // MARK: - CharactersData
 struct CharactersData: Codable {
     let info: Info
-    let characters: [Character]
+    let characters: [RickAndMortyCharacter]
 }
 
 // MARK: - Info
@@ -21,7 +21,7 @@ struct Info: Codable {
 }
 
 // MARK: - Character
-struct Character: Codable {
+struct RickAndMortyCharacter: Codable {
     let id: Int
     let name: String
     let status: Status

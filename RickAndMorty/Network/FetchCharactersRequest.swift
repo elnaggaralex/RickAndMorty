@@ -10,7 +10,13 @@ final class FetchCharactersRequest: RequestType {
     
     typealias Response = CharactersData
     
-    var url: String = "https://rickandmortyapi.com/api/"
+    lazy var url: String = "https://rickandmortyapi.com/api/character/\(page)"
     
     var method: RequestMethod = .get
+    
+    let page: Int
+    
+    init(page: Int) {
+        self.page = page
+    }
 }
