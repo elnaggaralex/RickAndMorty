@@ -22,26 +22,7 @@ final class NetworkService: NetworkServiceType {
     
     func request<Request: RequestType>(request: Request) async throws -> Request.Response {
         let (data, response) = try await session.request(urlRequest: request.urlRequest)
-        return request.parse(response: response, data: data)
-    }
-    
-}
-
-protocol RequestType {
-    associatedtype Response
-    
-    var url: String { get }
-    var method: RequestMethod { get }
-    
-    func parse(response: URLResponse, data: Data) -> Response
-}
-
-extension RequestType {
-    var urlRequest: URLRequest {
-        guard let url = URL(string: url) else { fatalError("URL is not correct")}
-        let urlRequest = URLRequest(url: url)
-        
-        return urlRequest
+        return try request.parse(response: response, data: data)
     }
 }
 
@@ -51,6 +32,18 @@ enum RequestMethod {
     case post
     case put
     case delete
+}
+
+extension RequestMethod {
+    var httpMethod: String {
+        let method: String = switch self {
+        case .get: "get"
+        case .post: "post"
+        case .put: "put"
+        case .delete: "delete"
+        }
+        return method
+    }
 }
 
 protocol URLSessionType {
