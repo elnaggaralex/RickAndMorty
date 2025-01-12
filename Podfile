@@ -6,6 +6,7 @@ target 'RickAndMorty' do
   use_frameworks!
 
     pod 'Cartography'
+    pod 'Kingfisher', '~> 8.0'
 
   target 'RickAndMortyTests' do
     inherit! :search_paths
