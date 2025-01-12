@@ -21,7 +21,7 @@ extension RequestType {
         do {
             return try JSONDecoder().decode(Response.self, from: data)
         } catch {
-            throw NSError()
+            throw ServiceErrors.parsingError
         }
     }
 }

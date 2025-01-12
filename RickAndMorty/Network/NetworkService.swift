@@ -25,6 +25,9 @@ final class NetworkService: NetworkServiceType {
     
     func request<Request: RequestType>(request: Request) async throws -> Request.Response {
         let (data, response) = try await session.request(urlRequest: request.urlRequest)
+        if let response  = response as? HTTPURLResponse, response.statusCode != 200 {
+            throw ServiceErrors.networkError
+        }
         return try request.parse(response: response, data: data)
     }
 }
@@ -59,4 +62,9 @@ extension URLSession: URLSessionType {
     func request(urlRequest: URLRequest) async throws -> Response {
         try await self.data(for: urlRequest)
     }
+}
+
+enum ServiceErrors: Error {
+    case networkError
+    case parsingError
 }
