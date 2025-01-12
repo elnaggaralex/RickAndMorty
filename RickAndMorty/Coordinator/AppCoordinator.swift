@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AppCoordinatorType {
-    /// Start the App main screen
+    /// Start the App main flow
     func start()
 }
 
@@ -19,10 +19,11 @@ final class AppCoordinator: AppCoordinatorType {
     
     init(window: UIWindow?) {
         self.window = window
-        navigationController = UINavigationController(rootViewController: UIViewController())
+        navigationController =  UINavigationController()
     }
     
     func start() {
+        navigationController.viewControllers = [CharactersViewController(viewModel: CharactersViewModel(coordinator: self, repository: CharactersRepository(networkService: NetworkService())))]
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }

@@ -10,11 +10,15 @@ final class FetchCharacterDetailsRequest: RequestType {
     
     typealias Response = RickAndMortyCharacter
     
-    lazy var url: String = "https://rickandmortyapi.com/api/character/\(id)"
+    lazy var url: String = "https://rickandmortyapi.com/api/character"
     
     var method: RequestMethod = .get
     
     let id: Int
+    
+    lazy var parameters: [String: String] = {
+        ["id": "\(id)"]
+    }()
     
     init(id: Int) {
         self.id = id

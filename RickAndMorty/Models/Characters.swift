@@ -11,13 +11,14 @@ import Foundation
 // MARK: - CharactersData
 struct CharactersData: Codable {
     let info: Info
-    let characters: [RickAndMortyCharacter]
+    let results: [RickAndMortyCharacter]
 }
 
 // MARK: - Info
 struct Info: Codable {
     let count, pages: Int
-    let next, prev: String
+    let next: String
+    let prev: String?
 }
 
 // MARK: - Character

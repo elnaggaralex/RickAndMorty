@@ -8,6 +8,9 @@
 import Foundation
 
 protocol NetworkServiceType {
+    /// Request the data of the URL
+    /// - Parameter request: URL Requests
+    /// - Returns: Decoded response from the data
     func request<Request: RequestType>(request: Request) async throws -> Request.Response
 }
 
